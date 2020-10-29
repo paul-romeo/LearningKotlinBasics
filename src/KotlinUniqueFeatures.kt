@@ -16,6 +16,9 @@ fun main() {
     // 11. Reduce() used to reduce list of numbers into one final value
     // 12. Fold() similar to reduce, but can change the value of each element before perform the operation
     // 13. flatMap()
+    // 14. Chaining functions
+    // 15. Extend function to class
+    // 16. Safe around null string
 
 
 
@@ -144,18 +147,36 @@ fun main() {
 
     // Observation: it appears that functions fold() are more powerful than reduce()
 
-    // 13. flatMap()
-//    fun flatMapResult() {
-//        val numsList = listOf(
-//                listOf(2, 3, 4),
-//                listOf(1, 2, 2, 3, 4)
-//        )
-//        println("I am inside the flatMap()")
-//        return numsList.flatMap { list: List<Int> -> list }
+    // 13. flatMap() flattens 2-dimension list into a one-dimension list
+    //     Note: 'it' is an element
+    val list = listOf(listOf(1, 2, 3), listOf(4, 5), listOf(6, 7))
+    println(list.flatMap { it.toList() }) // [1, 2, 3, 4, 5]
+
+    // 14. Chaining functions: linking 3 functions filter, map, and forEach
+    //     The order of processing is from left to right
+    val numbersList5 = 1 .. 100
+    println(numbersList5.filter{it % 5 == 0}.map{it * 20}.forEach{print("$it ")})
+
+    // 15. Extend function to class
+    fun String.isSameAs(value: String) = this == value
+    println("Me".isSameAs("Me"))
+
+    // 16. Safe with null string
+    var s: String? = ""
+//    s = null
+    println(s?.length) // Display null or the actual length
+
+//    import arrow.core.* // why not working ?
+//    fun processRequest(input: String): Option<String> {
+//        if (input.contains("valid")) {
+//            return Option("All good!")
+//        } else {
+//            return Option.empty()
+//        }
 //    }
-//    println(flatMapResult())
-
-
+//
+//    val result = processRequest("This is a valid request")
+//    if (result.isDefined()) println("There is a value ")
 
 } // main
 
